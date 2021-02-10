@@ -14,6 +14,8 @@ class App extends React.Component {
       activity: '',
       exerciseAPIData: {},
       foodAPIData: {},
+      fullExerciseList: {},
+      fullFoodList: {}
       
     }
 
