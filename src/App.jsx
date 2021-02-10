@@ -16,6 +16,8 @@ class App extends React.Component {
       activity: '',
       exerciseAPIData: {},
       foodAPIData: {},
+      fullExerciseList: {},
+      fullFoodList: {}
       
     }
 
@@ -75,18 +77,19 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.APIPostForExercises("1 hour walking, 1 hour bouldering, 1 hour sleeping");
-    this.APIPostForFoods();
+    // this.APIPostForExercises("1 hour walking, 1 hour bouldering, 1 hour sleeping");
+    // this.APIPostForFoods();
   }
 
   render() {
 
     return (
       <div>
+        <h1 className="title"> Food to Activity Converter</h1>
         <h3>
           Input either a food amount or an activity with a time duration and press get data to get info from the API.
         </h3>
-              
+        <a href="https://en.wikipedia.org/wiki/Metabolic_equivalent_of_task" target="_blank">Wikipedia article for MET(Metabolic_equivalent_of_task)</a>      
       <FoodConverterForm 
         handleSubmit={this.handleSubmit}
         handleChange={this.handleChange}
@@ -106,19 +109,13 @@ class App extends React.Component {
         queryString={this.state.activity}/>
       <br/>
       Based on data from the API...
-      <Draggable>
       <ActivityList 
         exerciseData={this.state.exerciseAPIData}
       /> 
-      </Draggable>
       <br/>
       <FoodData
         foodData={this.state.foodAPIData}
       /> 
-
-      <Draggable>
-        <div> testing?</div>
-      </Draggable>
       
       
 

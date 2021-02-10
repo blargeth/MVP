@@ -1,4 +1,5 @@
 import React from "react";
+import Draggable from 'react-draggable';
 
 var FoodData = (props) => {
     // console.log(props)
@@ -8,12 +9,12 @@ var FoodData = (props) => {
         return (
         <div key={oneFood.tags.tag_id}> 
           <img src={oneFood.photo.thumb} alt={`pic of ${props.name}`} width="50" height="60"></img> 
-          {oneFood.serving_qty} {oneFood.serving_unit} of {oneFood.food_name} will provide {oneFood.nf_calories} calories of energy 
+          {oneFood.serving_qty} {oneFood.serving_unit} of {oneFood.food_name} will provide {oneFood.nf_calories} calories of energy
         </div>)
     }));
     }
 
-    return (
+    return (  
     <div onClick={props.APIgetRequest}> 
         list of your foods: <br/>
         [quantity] [unit] of [food] will provide [calories] of energy
