@@ -6,6 +6,8 @@ import FoodConverterForm from "./foodConverterForm"
 import ActivityList from "./activityList";
 import FoodData from "./foodData";
 
+import Draggable from 'react-draggable';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -104,14 +106,20 @@ class App extends React.Component {
         queryString={this.state.activity}/>
       <br/>
       Based on data from the API...
+      <Draggable>
       <ActivityList 
         exerciseData={this.state.exerciseAPIData}
       /> 
+      </Draggable>
       <br/>
       <FoodData
         foodData={this.state.foodAPIData}
       /> 
 
+      <Draggable>
+        <div> testing?</div>
+      </Draggable>
+      
       
 
       <br/><br/><br/>

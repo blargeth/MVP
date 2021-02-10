@@ -1,4 +1,5 @@
 import React from "react";
+import Draggable from 'react-draggable';
 
 var ActivityList = (props) => {
     // console.log(props)
@@ -6,10 +7,12 @@ var ActivityList = (props) => {
 
     var renderExercises = props.exerciseData.data?.exercises.map((oneExercise => {
         return (
-        <div key={oneExercise.tag_id}> 
+        <Draggable key={oneExercise.tag_id}>
+        <div > 
           <img src={oneExercise.photo.thumb} alt={`[pic of ${oneExercise.name}]`} width="50" height="60"></img> 
           By {oneExercise.name} for {oneExercise.duration_min} minutes, you burn {oneExercise.nf_calories} calories 
-        </div>)
+        </div>
+        </Draggable>)
     }));
     }
 
