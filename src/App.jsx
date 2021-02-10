@@ -6,6 +6,7 @@ import FoodConverterForm from "./foodConverterForm"
 import ActivityList from "./activityList";
 import FoodData from "./foodData";
 import QueryHistory from "./queryHistory";
+import Results from "./results";
 
 class App extends React.Component {
   constructor(props) {
@@ -114,7 +115,8 @@ class App extends React.Component {
     return (
       <div>
         <h3>
-          Input either a food amount or an activity with a time duration and press get data to get info from the API.
+          Input either a food amount or an activity with a time duration and press get data to get info from the API. <br/>
+          The app starts with queries for walking and potatoes.
         </h3>
               
       <FoodConverterForm 
@@ -136,6 +138,7 @@ class App extends React.Component {
         queryString={this.state.activity}/>
       <br/>
       Based on data from the API...
+      <Results />
       <ActivityList 
         exerciseData={this.state.exerciseAPIData}
       /> 
