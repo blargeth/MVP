@@ -17,8 +17,8 @@ class App extends React.Component {
       exerciseAPIData: {},
       foodAPIData: {},
       fullExerciseList: [],
-      fullFoodList: []
-      
+      fullFoodList: [],
+      sliderValue: 60
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,6 +26,7 @@ class App extends React.Component {
     this.APIPostForFoods = this.APIPostForFoods.bind(this);
     this.APIPostForExercises = this.APIPostForExercises.bind(this);
     this.changeResultState = this.changeResultState.bind(this);
+    this.sliderChange = this.sliderChange.bind(this);
   }
 
   APIPostForFoods(query) {
@@ -38,14 +39,13 @@ class App extends React.Component {
         }
         })
       .then(result => {
-        console.log(result)
 
         this.setState({"foodAPIData": result})
         return result})
       .catch(err => {console.log(err)})
       //update full list
       .then(result => {
-        console.log(result, "result")
+
         this.setState((state) => {
           state.fullFoodList.push(result);
           return {
@@ -67,14 +67,13 @@ class App extends React.Component {
         }
         })
       .then(result => {
-        console.log(result)
 
         this.setState({"exerciseAPIData": result})
         return result})
       .catch(err => {console.log(err)})
       //update full list
       .then(result => {
-        console.log(result, "result")
+
         this.setState((state) => {
           state.fullExerciseList.push(result);
           return {
@@ -105,17 +104,34 @@ class App extends React.Component {
     console.log("changes result state");
   }
 
+  sliderChange(e) {
+    if (e.target.value >= 180) {
+      e.target.value = 180
+    }
+    if (e.target.value <= 0) {
+      e.target.value = 0
+    }
+    this.setState({
+      sliderValue: e.target.value
+    })
+  }
+
   componentDidMount() {
-    this.APIPostForExercises("1 hour walking");
-    this.APIPostForFoods();
+  //   this.APIPostForExercises("1 hour walking");
+  //   this.APIPostForFoods()
+  //   .then(potatoResults => this.setState((state) => ({potatoData: state.foodAPIData,
+  // })))
+    // .catch(err => {console.log(err)})
+
   }
 
   render() {
 
     return (
       <div>
+        <h1 className="title"> Activity to Potato Converter</h1>
         <h3>
-          Input either a food amount or an activity with a time duration and press get data to get info from the API. <br/>
+          Input either a food amount or an activity with a time duration to get info from the API. <br/>
           The app starts with queries for walking and potatoes.
         </h3>
               
@@ -138,7 +154,13 @@ class App extends React.Component {
         queryString={this.state.activity}/>
       <br/>
       Based on data from the API...
-      <Results />
+      <Results 
+        exerciseData={this.state.exerciseAPIData}
+        foodData={this.state.foodAPIData}
+        sliderValue={this.state.sliderValue}
+        sliderChange={this.sliderChange}
+      />
+
       <ActivityList 
         exerciseData={this.state.exerciseAPIData}
       /> 

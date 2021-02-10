@@ -2,6 +2,26 @@
     color: black;
 }
 
+.title {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+}
+
 .inputBox {
     height: 30px;
+}
+
+.potatoes{
+    font-size: larger;
+    font-family: monospace;
+    font-weight: bolder;
+}
+
+.activity{
+    font-size: larger;
+    font-family: monospace;
+    font-weight: bolder;
 }

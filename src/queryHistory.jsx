@@ -13,19 +13,21 @@ var QueryHistory = (props) => {
     //     </div>)
     // }));
     // }
-
+    var c=0;
     return (
     <div> 
         <h2> Previously Searched Activity History </h2>
         {props.history.exercisesQueries?.map(query => {
             return query.data.exercises.map(exercise => {
-                return (<div> {exercise.name} </div>)
+                c++;
+                return (<div key={c}> {exercise.name} </div>)
             })
         })}
         <h2> Previously Searched Food History </h2>
         {props.history.foodsQueries?.map(query => {
             return query.data.foods.map(food => {
-                return (<div> {food.food_name} </div>)
+                c++;
+                return (<div key={c}> {food.food_name} </div>)
             })
         })}
 
