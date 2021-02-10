@@ -14,8 +14,8 @@ class App extends React.Component {
       activity: '',
       exerciseAPIData: {},
       foodAPIData: {},
-      fullExerciseList: {},
-      fullFoodList: {}
+      fullExerciseList: [],
+      fullFoodList: []
       
     }
 
@@ -40,6 +40,18 @@ class App extends React.Component {
         this.setState({"foodAPIData": result})
         return result})
       .catch(err => {console.log(err)})
+      //update full list
+      .then(result => {
+        console.log(result, "result")
+        this.setState((state) => {
+          state.fullFoodList.push(result);
+          return {
+            fullFoodList: state.fullFoodList
+          }
+        })
+      })
+      .catch(err => {console.log(err)})
+      
   }
 
   APIPostForExercises(query) {
@@ -56,6 +68,17 @@ class App extends React.Component {
 
         this.setState({"exerciseAPIData": result})
         return result})
+      .catch(err => {console.log(err)})
+      //update full list
+      .then(result => {
+        console.log(result, "result")
+        this.setState((state) => {
+          state.fullExerciseList.push(result);
+          return {
+            fullExerciseList: state.fullExerciseList
+          }
+        })
+      })
       .catch(err => {console.log(err)})
   }
 
