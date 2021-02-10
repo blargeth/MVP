@@ -112,6 +112,8 @@ class App extends React.Component {
         foodData={this.state.foodAPIData}
       /> 
 
+      
+
       <br/><br/><br/>
       </div>
     );

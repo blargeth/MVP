@@ -8,7 +8,7 @@ app.use(express.json());
 
 // respond with "hello world" when a GET request is made to the homepage
 app.get('/', function (req, res) {
-  res.send('hello world')
+  res.send('your app will load here')
 })
 
 const port = 3000;

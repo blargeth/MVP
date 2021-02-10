@@ -5,7 +5,11 @@ var FoodData = (props) => {
     if (Object.keys(props.foodData.length !== 0)){
 
     var renderFoods = props.foodData.data?.foods.map((oneFood => {
-        return (<div key={oneFood.tags.tag_id}>{oneFood.serving_qty} {oneFood.serving_unit} of {oneFood.food_name} will provide {oneFood.nf_calories} calories of energy </div>)
+        return (
+        <div key={oneFood.tags.tag_id}> 
+          <img src={oneFood.photo.thumb} alt={`pic of ${props.name}`} width="50" height="60"></img> 
+          {oneFood.serving_qty} {oneFood.serving_unit} of {oneFood.food_name} will provide {oneFood.nf_calories} calories of energy 
+        </div>)
     }));
     }
 
