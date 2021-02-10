@@ -5,6 +5,7 @@ import Button from "./getButton";
 import FoodConverterForm from "./foodConverterForm"
 import ActivityList from "./activityList";
 import FoodData from "./foodData";
+import QueryHistory from "./queryHistory";
 
 class App extends React.Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.APIPostForFoods = this.APIPostForFoods.bind(this);
     this.APIPostForExercises = this.APIPostForExercises.bind(this);
+    this.changeResultState = this.changeResultState.bind(this);
   }
 
   APIPostForFoods(query) {
@@ -97,8 +99,13 @@ class App extends React.Component {
     })
   }
 
+  //use previous query data to change current data
+  changeResultState() {
+    console.log("changes result state");
+  }
+
   componentDidMount() {
-    this.APIPostForExercises("1 hour walking, 1 hour bouldering, 1 hour sleeping");
+    this.APIPostForExercises("1 hour walking");
     this.APIPostForFoods();
   }
 
@@ -137,7 +144,10 @@ class App extends React.Component {
         foodData={this.state.foodAPIData}
       /> 
 
-      
+      <QueryHistory 
+      history={{
+        "exercisesQueries": this.state.fullExerciseList,
+        "foodsQueries": this.state.fullFoodList}} />
 
       <br/><br/><br/>
       </div>
