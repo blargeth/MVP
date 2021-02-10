@@ -3,9 +3,8 @@ import React from "react";
 
 var Button = (props) => {
 
-    return <button onClick={props.APIgetRequestforPotatoes}> press me to get potato data!</button>
+    return <button onClick={(e) => props.onClickFunction(props.queryString)}> {props.message}</button>
       
 }
-
 
 export default Button;

@@ -17,16 +17,17 @@ class App extends React.Component {
     this.APIgetRequest = this.APIgetRequestforPotatoes.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.APIPostForFoods = this.APIPostForFoods.bind(this);
+    this.APIPostForExercises = this.APIPostForExercises.bind(this);
   }
 
   APIgetRequestforPotatoes() {
     console.log('running the api request!!')
-    console.log(APIID, APPIKEY)
     return axios.get(`https://trackapi.nutritionix.com/v2/search/instant?query="potato"&detailed=true`, {
       headers: {
-          'x-app-id': window.APIKEY,
-          'x-app-key': window.APIID,
-        }
+        'x-app-id': 'a68bfb58',
+        'x-app-key': '873ad07273ee8534c33943bf98f26e23'
+      }
       })
       .then(result => {
         console.log(result)
@@ -35,6 +36,40 @@ class App extends React.Component {
         return result})
       .catch(err => {console.log(err)})
   };
+
+  APIPostForFoods(query) {
+    return axios.post(`https://trackapi.nutritionix.com/v2/natural/nutrients`, {
+        "query": query || "potatoes"
+      }, {
+        headers: {
+          'x-app-id': window.APIKEYyy,
+          'x-app-key': window.APIIDdd
+        }
+        })
+      .then(result => {
+        console.log(result)
+
+        this.setState({potatoData: result})
+        return result})
+      .catch(err => {console.log(err)})
+  }
+
+  APIPostForExercises(query) {
+    return axios.post(`https://trackapi.nutritionix.com/v2/natural/exercise`, {
+        "query": query || "sleeping for 1 hour"
+      }, {
+        headers: {
+          'x-app-id': window.APIKEYyy,
+          'x-app-key': window.APIIDdd
+        }
+        })
+      .then(result => {
+        console.log(result)
+
+        this.setState({potatoData: result})
+        return result})
+      .catch(err => {console.log(err)})
+  }
 
   handleSubmit (e) {
     e.preventDefault();
@@ -64,7 +99,13 @@ class App extends React.Component {
       activity={this.state.activity}
       />
       <ResultDiv/> <br/><br/><br/>
-      <Button APIgetRequestforPotatoes={this.APIgetRequestforPotatoes} />
+      <Button onClickFunction={this.APIgetRequestforPotatoes} message="press me to get potato data!"/>
+      <Button onClickFunction={this.APIPostForFoods} 
+      message="i want my food query!"
+      queryString={this.state.food}/>
+      <Button onClickFunction={this.APIPostForExercises} 
+      message="i want my exercise query!"
+      queryString={this.state.activity}/>
       </div>
     );
   }
