@@ -9,9 +9,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      potatoData : undefined,
+      potatoData : {},
       food: '',
-      activity: ''
+      activity: '',
+      exerciseAPIData: {},
+      foodAPIData: {}
+
     }
 
     this.APIgetRequest = this.APIgetRequestforPotatoes.bind(this);
@@ -25,13 +28,13 @@ class App extends React.Component {
     console.log('running the api request!!')
     return axios.get(`https://trackapi.nutritionix.com/v2/search/instant?query="potato"&detailed=true`, {
       headers: {
-        'x-app-id': 'a68bfb58',
-        'x-app-key': '873ad07273ee8534c33943bf98f26e23'
+        'x-app-id': window.APIKEYyy,
+        'x-app-key': window.APIIDdd
       }
       })
       .then(result => {
         console.log(result)
-
+        
         this.setState({potatoData: result})
         return result})
       .catch(err => {console.log(err)})
@@ -49,7 +52,7 @@ class App extends React.Component {
       .then(result => {
         console.log(result)
 
-        this.setState({potatoData: result})
+        this.setState({"foodAPIData": result})
         return result})
       .catch(err => {console.log(err)})
   }
@@ -66,7 +69,7 @@ class App extends React.Component {
       .then(result => {
         console.log(result)
 
-        this.setState({potatoData: result})
+        this.setState({"exerciseAPIData": result})
         return result})
       .catch(err => {console.log(err)})
   }
@@ -74,6 +77,10 @@ class App extends React.Component {
   handleSubmit (e) {
     e.preventDefault();
     console.log("clicked!")
+    this.setState({
+      "food": '',
+      "activity": ''
+    })
   }
 
   handleChange(e, stateName) {
@@ -82,7 +89,9 @@ class App extends React.Component {
     })
   }
 
-
+  componentDidMount() {
+    this.APIPostForExercises("1 hour walking, 1 hour bouldering, 1 hour sleeping")
+  }
 
   render() {
 
@@ -93,19 +102,23 @@ class App extends React.Component {
         </h3>
               
       <FoodConverterForm 
-      handleSubmit={this.handleSubmit}
-      handleChange={this.handleChange}
-      food={this.state.food}
-      activity={this.state.activity}
+        handleSubmit={this.handleSubmit}
+        handleChange={this.handleChange}
+        food={this.state.food}
+        activity={this.state.activity}
       />
-      <ResultDiv/> <br/><br/><br/>
       <Button onClickFunction={this.APIgetRequestforPotatoes} message="press me to get potato data!"/>
       <Button onClickFunction={this.APIPostForFoods} 
-      message="i want my food query!"
-      queryString={this.state.food}/>
+        message="i want my food query!"
+        queryString={this.state.food}/>
       <Button onClickFunction={this.APIPostForExercises} 
-      message="i want my exercise query!"
-      queryString={this.state.activity}/>
+        message="i want my activity query!"
+        queryString={this.state.activity}/>
+      <ResultDiv 
+        exerciseData={this.state.exerciseAPIData}
+        foodData={this.state.foodAPIData}
+      /> 
+      <br/><br/><br/>
       </div>
     );
   }

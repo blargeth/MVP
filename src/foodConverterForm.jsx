@@ -11,7 +11,9 @@ var FoodConverterForm = (props) => {
         onChange={(e) => {props.handleChange(e, "food")}} 
         placeholder="ex: 1 potato"/>
       </label> <br />
-      <input type="button" value="Submit" value="swap" onClick={props.handleSubmit}/>
+
+      <input type="button" value="Submit" value="clearAll" onClick={props.handleSubmit}/>
+
       <label> <br />
         Activity: <br/>
         <input className="inputBox" 
@@ -21,7 +23,9 @@ var FoodConverterForm = (props) => {
         placeholder="ex: 30 minutes of sleeping" 
         />
       </label> <br/>
-      <button > Get data! </button>
+      <button onClick={e=>{
+          e.preventDefault();
+          console.log("clicked...")}}> Do nothing! </button>
     </form>
     )
 }
