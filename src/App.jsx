@@ -3,42 +3,25 @@ import axios from "axios";
 
 import Button from "./getButton";
 import FoodConverterForm from "./foodConverterForm"
-import ResultDiv from "./resultDiv";
+import ActivityList from "./activityList";
+import FoodData from "./foodData";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      potatoData : {},
       food: '',
       activity: '',
       exerciseAPIData: {},
-      foodAPIData: {}
-
+      foodAPIData: {},
+      
     }
 
-    this.APIgetRequest = this.APIgetRequestforPotatoes.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.APIPostForFoods = this.APIPostForFoods.bind(this);
     this.APIPostForExercises = this.APIPostForExercises.bind(this);
   }
-
-  APIgetRequestforPotatoes() {
-    console.log('running the api request!!')
-    return axios.get(`https://trackapi.nutritionix.com/v2/search/instant?query="potato"&detailed=true`, {
-      headers: {
-        'x-app-id': window.APIKEYyy,
-        'x-app-key': window.APIIDdd
-      }
-      })
-      .then(result => {
-        console.log(result)
-        
-        this.setState({potatoData: result})
-        return result})
-      .catch(err => {console.log(err)})
-  };
 
   APIPostForFoods(query) {
     return axios.post(`https://trackapi.nutritionix.com/v2/natural/nutrients`, {
@@ -90,7 +73,8 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.APIPostForExercises("1 hour walking, 1 hour bouldering, 1 hour sleeping")
+    this.APIPostForExercises("1 hour walking, 1 hour bouldering, 1 hour sleeping");
+    this.APIPostForFoods();
   }
 
   render() {
@@ -107,17 +91,27 @@ class App extends React.Component {
         food={this.state.food}
         activity={this.state.activity}
       />
-      <Button onClickFunction={this.APIgetRequestforPotatoes} message="press me to get potato data!"/>
+
+      <Button onClickFunction={this.APIPostForFoods} 
+      message="press me to get potato data!"/>
+
       <Button onClickFunction={this.APIPostForFoods} 
         message="i want my food query!"
         queryString={this.state.food}/>
+
       <Button onClickFunction={this.APIPostForExercises} 
         message="i want my activity query!"
         queryString={this.state.activity}/>
-      <ResultDiv 
+      <br/>
+      Based on data from the API...
+      <ActivityList 
         exerciseData={this.state.exerciseAPIData}
+      /> 
+      <br/>
+      <FoodData
         foodData={this.state.foodAPIData}
       /> 
+
       <br/><br/><br/>
       </div>
     );
