@@ -6,8 +6,8 @@ var FoodConverterForm = (props) => {
 
       <label> <br />
         Activity: <br/>
-        <input className="inputBox" 
-        type="text" 
+        <textarea className="inputBox" 
+        type="textarea" 
         value={props.activity}
         onChange={(e) => {props.handleChange(e, "activity")}}
         placeholder="ex: 30 minutes of sleeping" 
@@ -16,8 +16,8 @@ var FoodConverterForm = (props) => {
 
       <label> <br/>
         Food: <br/>
-        <input className="inputBox" 
-        type="text" 
+        <textarea className="inputBox" 
+        type="textarea" 
         value={props.food}
         onChange={(e) => {props.handleChange(e, "food")}} 
         placeholder="ex: 1 potato"/>

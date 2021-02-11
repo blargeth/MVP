@@ -6,5 +6,4 @@ var InputActivity = (props) => {
       
 }
 
-
 export default InputActivity;

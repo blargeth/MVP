@@ -11,7 +11,9 @@ h3 {
 }
 
 .inputBox {
-    height: 30px;
+    height: 60px;
+    resize:none;
+    vertical-align:text-top;
 }
 
 .potatoes{

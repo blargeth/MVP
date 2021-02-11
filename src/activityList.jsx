@@ -15,7 +15,7 @@ let ActivityList = (props) => {
 
     return (
     <div> 
-        list of your activities:
+        <h4>list of your activities:</h4>
         {renderExercises}
     </div>)
 }

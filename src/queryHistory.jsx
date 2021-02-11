@@ -20,14 +20,15 @@ var QueryHistory = (props) => {
         {props.history.exercisesQueries?.map(query => {
             return query.data.exercises.map(exercise => {
                 c++;
-                return (<div key={c}> {exercise.name} </div>)
+                return (<div key={c} onClick={(e)=> {console.log('clicked on the thing!')}}> {exercise.name} </div>)
             })
         })}
+
         <h2> Previously Searched Food History </h2>
         {props.history.foodsQueries?.map(query => {
             return query.data.foods.map(food => {
                 c++;
-                return (<div key={c}> {food.food_name} </div>)
+                return (<div key={c} onClick={(e)=> {console.log('clicked on the thing!')}}> {food.food_name} </div>)
             })
         })}
 

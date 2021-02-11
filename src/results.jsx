@@ -25,6 +25,7 @@ let Results = (props) => {
     <div> 
         <h1>Results from your query:</h1>
         <h2> You will need to eat <span className="potatoes"> {potatoesPerActivity} </span> potatoes for <span className="activity"> {exerciseList} </span> for {props.sliderValue} minutes</h2>
+        Scale your potato energy!
         <form onSubmit={(e) => {e.preventDefault}}>
           <input 
             type="range" 

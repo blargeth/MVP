@@ -129,7 +129,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <h1 className="title"> Activity to Potato Converter</h1>
+        <h1 className="title"> Potato to Activity Converter</h1>
         <h3>
           Input either a food amount or an activity with a time duration to get info from the API. <br/>
           The app starts with queries for walking and potatoes.
