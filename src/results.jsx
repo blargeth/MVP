@@ -8,7 +8,7 @@ let Results = (props) => {
         return oneExercise.name;
     })) || '[no activity]';
 
-    var caloriesPerPotato = 160.89;
+    var caloriesPerFoodItem = props.comparedFood.calories;
     var caloriesPerActivityPerHour = props.exerciseData.data?.exercises.reduce(((acc, currentVal) => {
         let calories = currentVal.nf_calories;
         let minutes = currentVal.duration_min;
@@ -16,7 +16,7 @@ let Results = (props) => {
         return acc + CalsPerMinPerHour;
     }), 0);
     // console.log(caloriesPerActivityPerHour, 'cals per hour')
-    var potatoesPerActivity = (caloriesPerActivityPerHour / caloriesPerPotato) || '0';
+    var potatoesPerActivity = (caloriesPerActivityPerHour / caloriesPerFoodItem) || '0';
     // console.log(exerciseList.join(', '), "exerlist")
     if (Array.isArray(exerciseList)) {
         exerciseList = exerciseList.join(', ');
@@ -24,7 +24,7 @@ let Results = (props) => {
     return (
     <div> 
         <h1>Results from your query:</h1>
-        <h2> You will need to eat <span className="potatoes"> {potatoesPerActivity} </span> potatoes for <span className="activity"> {exerciseList} </span> for {props.sliderValue} minutes</h2>
+        <h2> You will need to eat <span className="potatoes"> {potatoesPerActivity} </span> {props.comparedFood.food} for <span className="activity"> {exerciseList} </span> for {props.sliderValue} minutes</h2>
         Scale your potato energy!
         <form onSubmit={(e) => {e.preventDefault}}>
           <input 

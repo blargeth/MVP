@@ -20,7 +20,11 @@ class App extends React.Component {
       fullExerciseList: [],
       fullFoodList: [],
       sliderValue: 60,
-      showNutritionFacts: false
+      showNutritionFacts: false,
+      comparedFood: {
+        "food": "potatoes",
+        "calories": 160.89
+      }
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,6 +34,7 @@ class App extends React.Component {
     this.changeResultState = this.changeResultState.bind(this);
     this.sliderChange = this.sliderChange.bind(this);
     this.toggleNutritionFacts = this.toggleNutritionFacts.bind(this);
+    this.changeCompareFood = this.changeCompareFood.bind(this);
   }
 
   APIPostForFoods(query) {
@@ -125,6 +130,16 @@ class App extends React.Component {
     })
   }
 
+  changeCompareFood(value, calories) {
+    console.log('changing food')
+    this.setState({
+      comparedFood: {
+        "food": value,
+        "calories": calories
+      }
+    })
+  }
+
   componentDidMount() {
   //   this.APIPostForExercises("1 hour walking");
   //   this.APIPostForFoods()
@@ -170,6 +185,7 @@ class App extends React.Component {
         foodData={this.state.foodAPIData}
         sliderValue={this.state.sliderValue}
         sliderChange={this.sliderChange}
+        comparedFood={this.state.comparedFood}
       />
 
       <ActivityList 
@@ -184,7 +200,8 @@ class App extends React.Component {
       <QueryHistory 
       history={{
         "exercisesQueries": this.state.fullExerciseList,
-        "foodsQueries": this.state.fullFoodList}} />
+        "foodsQueries": this.state.fullFoodList}}
+      changeCompareFood={this.changeCompareFood} />
 
       <br/><br/><br/>
       <a href="https://en.wikipedia.org/wiki/Metabolic_equivalent_of_task" target="_blank">Wikipedia article for MET(Metabolic_equivalent_of_task)</a>  
