@@ -175,6 +175,7 @@ class App extends React.Component {
         "foodsQueries": this.state.fullFoodList}} />
 
       <br/><br/><br/>
+      <a href="https://en.wikipedia.org/wiki/Metabolic_equivalent_of_task" target="_blank">Wikipedia article for MET(Metabolic_equivalent_of_task)</a>  
       </div>
     );
   }
