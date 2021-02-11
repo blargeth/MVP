@@ -2,9 +2,11 @@ import React from "react";
 
 // From a guy on codepen: https://codepen.io/chriscoyier/pen/egHEK
 
-var NutritionFacts = () => {
+var NutritionFacts = (props) => {
     return (
-<section className="performance-facts">
+<section className="performance-facts" onClick={(e) => {
+    console.log("you pressed on the nut facts");
+    props.toggleNutritionFacts()}}>
   <header className="performance-facts__header">
     <h1 className="performance-facts__title">Nutrition Facts</h1>
     <p>Serving Size 1/2 cup (about 82g) </p>

@@ -12,7 +12,9 @@ var FoodData = (props) => {
             alt={`pic of ${props.name}`} 
             width="50" 
             height="60"
-            onClick={(e)=> {console.log('clicked on the image!')}}>
+            onClick={(e)=> {
+              props.toggleNutritionFacts();
+            }}>
           </img> 
           {oneFood.serving_qty} {oneFood.serving_unit} of {oneFood.food_name} will provide {oneFood.nf_calories} calories of energy 
         </div>)
@@ -21,7 +23,7 @@ var FoodData = (props) => {
 
     return (
     <div onClick={props.APIgetRequest}> 
-        <h4>list of your foods:</h4> <br/>
+        <h4>list of your foods: </h4> <br/>
         [quantity] [unit] of [food] will provide [calories] of energy
         {renderFoods}
     </div>)

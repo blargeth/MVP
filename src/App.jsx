@@ -7,7 +7,7 @@ import ActivityList from "./activityList";
 import FoodData from "./foodData";
 import QueryHistory from "./queryHistory";
 import Results from "./results";
-import NutritionFacts from "./nutritionFacts";
+
 
 class App extends React.Component {
   constructor(props) {
@@ -19,7 +19,8 @@ class App extends React.Component {
       foodAPIData: {},
       fullExerciseList: [],
       fullFoodList: [],
-      sliderValue: 60
+      sliderValue: 60,
+      showNutritionFacts: false
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,6 +29,7 @@ class App extends React.Component {
     this.APIPostForExercises = this.APIPostForExercises.bind(this);
     this.changeResultState = this.changeResultState.bind(this);
     this.sliderChange = this.sliderChange.bind(this);
+    this.toggleNutritionFacts = this.toggleNutritionFacts.bind(this);
   }
 
   APIPostForFoods(query) {
@@ -117,6 +119,12 @@ class App extends React.Component {
     })
   }
 
+  toggleNutritionFacts() {
+    this.setState((state) => {
+      return {showNutritionFacts: !state.showNutritionFacts}
+    })
+  }
+
   componentDidMount() {
   //   this.APIPostForExercises("1 hour walking");
   //   this.APIPostForFoods()
@@ -141,6 +149,8 @@ class App extends React.Component {
         handleChange={this.handleChange}
         food={this.state.food}
         activity={this.state.activity}
+        showNutritionFacts={this.state.showNutritionFacts}
+        toggleNutritionFacts={this.toggleNutritionFacts}
       />
 
       <Button onClickFunction={this.APIPostForFoods} 
@@ -168,6 +178,7 @@ class App extends React.Component {
       <br/>
       <FoodData
         foodData={this.state.foodAPIData}
+        toggleNutritionFacts={this.toggleNutritionFacts}
       /> 
 
       <QueryHistory 
@@ -175,7 +186,6 @@ class App extends React.Component {
         "exercisesQueries": this.state.fullExerciseList,
         "foodsQueries": this.state.fullFoodList}} />
 
-      <NutritionFacts/>
       <br/><br/><br/>
       <a href="https://en.wikipedia.org/wiki/Metabolic_equivalent_of_task" target="_blank">Wikipedia article for MET(Metabolic_equivalent_of_task)</a>  
       </div>
