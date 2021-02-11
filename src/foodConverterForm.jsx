@@ -29,7 +29,7 @@ var FoodConverterForm = (props) => {
         placeholder="ex: 1 potato"/>
       </label> <br />
 
-      <input type="button" value="Submit" value="clear form" onClick={(e) => {
+      <input type="button" value="Submit" value="clear forms" onClick={(e) => {
           props.handleSubmit()
           props.toggleNutritionFacts()}}/>
       <br/>

@@ -131,7 +131,6 @@ class App extends React.Component {
   }
 
   changeCompareFood(value, calories) {
-    console.log('changing food')
     this.setState({
       comparedFood: {
         "food": value,
