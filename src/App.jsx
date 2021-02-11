@@ -5,6 +5,8 @@ import Button from "./getButton";
 import FoodConverterForm from "./foodConverterForm"
 import ActivityList from "./activityList";
 import FoodData from "./foodData";
+import QueryHistory from "./queryHistory";
+import Results from "./results";
 
 class App extends React.Component {
   constructor(props) {
@@ -14,13 +16,17 @@ class App extends React.Component {
       activity: '',
       exerciseAPIData: {},
       foodAPIData: {},
-      
+      fullExerciseList: [],
+      fullFoodList: [],
+      sliderValue: 60
     }
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.APIPostForFoods = this.APIPostForFoods.bind(this);
     this.APIPostForExercises = this.APIPostForExercises.bind(this);
+    this.changeResultState = this.changeResultState.bind(this);
+    this.sliderChange = this.sliderChange.bind(this);
   }
 
   APIPostForFoods(query) {
@@ -33,11 +39,22 @@ class App extends React.Component {
         }
         })
       .then(result => {
-        console.log(result)
 
         this.setState({"foodAPIData": result})
         return result})
       .catch(err => {console.log(err)})
+      //update full list
+      .then(result => {
+
+        this.setState((state) => {
+          state.fullFoodList.push(result);
+          return {
+            fullFoodList: state.fullFoodList
+          }
+        })
+      })
+      .catch(err => {console.log(err)})
+      
   }
 
   APIPostForExercises(query) {
@@ -50,10 +67,20 @@ class App extends React.Component {
         }
         })
       .then(result => {
-        console.log(result)
 
         this.setState({"exerciseAPIData": result})
         return result})
+      .catch(err => {console.log(err)})
+      //update full list
+      .then(result => {
+
+        this.setState((state) => {
+          state.fullExerciseList.push(result);
+          return {
+            fullExerciseList: state.fullExerciseList
+          }
+        })
+      })
       .catch(err => {console.log(err)})
   }
 
@@ -72,17 +99,40 @@ class App extends React.Component {
     })
   }
 
+  //use previous query data to change current data
+  changeResultState() {
+    console.log("changes result state");
+  }
+
+  sliderChange(e) {
+    if (e.target.value >= 180) {
+      e.target.value = 180
+    }
+    if (e.target.value <= 0) {
+      e.target.value = 0
+    }
+    this.setState({
+      sliderValue: e.target.value
+    })
+  }
+
   componentDidMount() {
-    this.APIPostForExercises("1 hour walking, 1 hour bouldering, 1 hour sleeping");
-    this.APIPostForFoods();
+  //   this.APIPostForExercises("1 hour walking");
+  //   this.APIPostForFoods()
+  //   .then(potatoResults => this.setState((state) => ({potatoData: state.foodAPIData,
+  // })))
+    // .catch(err => {console.log(err)})
+
   }
 
   render() {
 
     return (
       <div>
+        <h1 className="title"> Potato to Activity Converter</h1>
         <h3>
-          Input either a food amount or an activity with a time duration and press get data to get info from the API.
+          Input either a food amount or an activity with a time duration to get info from the API. <br/>
+          The app starts with queries for walking and potatoes.
         </h3>
               
       <FoodConverterForm 
@@ -104,6 +154,13 @@ class App extends React.Component {
         queryString={this.state.activity}/>
       <br/>
       Based on data from the API...
+      <Results 
+        exerciseData={this.state.exerciseAPIData}
+        foodData={this.state.foodAPIData}
+        sliderValue={this.state.sliderValue}
+        sliderChange={this.sliderChange}
+      />
+
       <ActivityList 
         exerciseData={this.state.exerciseAPIData}
       /> 
@@ -112,9 +169,13 @@ class App extends React.Component {
         foodData={this.state.foodAPIData}
       /> 
 
-      
+      <QueryHistory 
+      history={{
+        "exercisesQueries": this.state.fullExerciseList,
+        "foodsQueries": this.state.fullFoodList}} />
 
       <br/><br/><br/>
+      <a href="https://en.wikipedia.org/wiki/Metabolic_equivalent_of_task" target="_blank">Wikipedia article for MET(Metabolic_equivalent_of_task)</a>  
       </div>
     );
   }

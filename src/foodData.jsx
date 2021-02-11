@@ -7,7 +7,13 @@ var FoodData = (props) => {
     var renderFoods = props.foodData.data?.foods.map((oneFood => {
         return (
         <div key={oneFood.tags.tag_id}> 
-          <img src={oneFood.photo.thumb} alt={`pic of ${props.name}`} width="50" height="60"></img> 
+          <img 
+            src={oneFood.photo.thumb} 
+            alt={`pic of ${props.name}`} 
+            width="50" 
+            height="60"
+            onClick={(e)=> {console.log('clicked on the image!')}}>
+          </img> 
           {oneFood.serving_qty} {oneFood.serving_unit} of {oneFood.food_name} will provide {oneFood.nf_calories} calories of energy 
         </div>)
     }));
@@ -15,7 +21,7 @@ var FoodData = (props) => {
 
     return (
     <div onClick={props.APIgetRequest}> 
-        list of your foods: <br/>
+        <h4>list of your foods:</h4> <br/>
         [quantity] [unit] of [food] will provide [calories] of energy
         {renderFoods}
     </div>)

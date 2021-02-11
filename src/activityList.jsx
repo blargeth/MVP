@@ -1,6 +1,6 @@
 import React from "react";
 
-var ActivityList = (props) => {
+let ActivityList = (props) => {
     // console.log(props)
     if (Object.keys(props.exerciseData.length !== 0)){
 
@@ -15,7 +15,7 @@ var ActivityList = (props) => {
 
     return (
     <div> 
-        list of your activities:
+        <h4>list of your activities:</h4>
         {renderExercises}
     </div>)
 }
