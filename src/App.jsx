@@ -7,6 +7,7 @@ import ActivityList from "./activityList";
 import FoodData from "./foodData";
 import QueryHistory from "./queryHistory";
 import Results from "./results";
+import NutritionFacts from "./nutritionFacts";
 
 class App extends React.Component {
   constructor(props) {
@@ -174,6 +175,7 @@ class App extends React.Component {
         "exercisesQueries": this.state.fullExerciseList,
         "foodsQueries": this.state.fullFoodList}} />
 
+      <NutritionFacts/>
       <br/><br/><br/>
       <a href="https://en.wikipedia.org/wiki/Metabolic_equivalent_of_task" target="_blank">Wikipedia article for MET(Metabolic_equivalent_of_task)</a>  
       </div>

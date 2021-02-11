@@ -8,7 +8,7 @@ let ActivityList = (props) => {
         return (
         <div key={oneExercise.tag_id}> 
           <img src={oneExercise.photo.thumb} alt={`[pic of ${oneExercise.name}]`} width="50" height="60"></img> 
-          By {oneExercise.name} for {oneExercise.duration_min} minutes, you burn {oneExercise.nf_calories} calories 
+          By {oneExercise.name} for {oneExercise.duration_min} minutes, you burn {oneExercise.nf_calories} calories MET: {oneExercise.met} 
         </div>)
     }));
     }
