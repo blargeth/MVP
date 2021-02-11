@@ -5,7 +5,6 @@ import React from "react";
 var NutritionFacts = (props) => {
     return (
 <section className="performance-facts" onClick={(e) => {
-    console.log("you pressed on the nut facts");
     props.toggleNutritionFacts()}}>
   <header className="performance-facts__header">
     <h1 className="performance-facts__title">Nutrition Facts</h1>
