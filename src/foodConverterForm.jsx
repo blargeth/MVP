@@ -1,6 +1,12 @@
 import React from "react";
 
+import NutritionFacts from "./nutritionFacts";
+
 var FoodConverterForm = (props) => {
+  var renderNutritionFacts = null;
+  if (props.showNutritionFacts) {
+    renderNutritionFacts = <NutritionFacts toggleNutritionFacts={props.toggleNutritionFacts}/>
+  }
     return (
     <form>
 
@@ -23,11 +29,15 @@ var FoodConverterForm = (props) => {
         placeholder="ex: 1 potato"/>
       </label> <br />
 
-      <input type="button" value="Submit" value="clear form" onClick={props.handleSubmit}/>
+      <input type="button" value="Submit" value="clear forms" onClick={(e) => {
+          props.handleSubmit()
+          props.toggleNutritionFacts()}}/>
       <br/>
       <button onClick={e=>{
           e.preventDefault();
           console.log("clicked...")}}> Do nothing! </button>
+
+      {renderNutritionFacts}
     </form>
     )
 }
